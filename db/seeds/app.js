@@ -1,6 +1,5 @@
 const express = require("express");
 const { getTopics } = require("../controllers/getTopics.controller");
-console.log('in the app');
 const app = express();
 
 app.use(express.json()); //?

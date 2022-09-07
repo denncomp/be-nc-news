@@ -12,14 +12,12 @@ beforeEach(() => {
   return seed(test_data); //< seed(seed)
 });
 
-describe("using the App.js to run our database of topics", () => {
-  describe("GET request along the path of /api/topics.. returns an array of topics", () => {
+  describe.only("GET request along the path of /api/topics.. returns an array of topics", () => {
     test(" get an array of topics with the status code 200", () => {
       return request(app)
         .get("/api/topics")
         .expect(200)
         .then((response) => {
-          expect(Array.isArray(response.body.topics)).toBe(true);
           expect(response.body.topics.length > 0).toBe(true);
           expect(
             response.body.topics.forEach((topics) => {
@@ -36,4 +34,3 @@ describe("using the App.js to run our database of topics", () => {
         });
     })
   });
-});
