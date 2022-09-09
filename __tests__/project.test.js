@@ -42,21 +42,30 @@ beforeEach(() => {
         .get(`/api/article/${article_Id}`)
         .expect(200)
         .then((response) => {
-          expect(response.body.article).toHaveProperty("author", "butter_bridge");
-          expect(response.body.article).toHaveProperty("title", "Living in the shadow of a great man");
-          expect(response.body.article).toHaveProperty("body", "I find this existence challenging");
-          expect(response.body.article).toHaveProperty("topic", "mitch");
-          expect(response.body.article).toHaveProperty("created_at", expect.any(String));
-          expect(response.body.article).toHaveProperty("votes", expect.any(Number));
+          expect(response.body).toHaveProperty("author", "butter_bridge");
+          expect(response.body).toHaveProperty("title", "Living in the shadow of a great man");
+          expect(response.body).toHaveProperty("body", "I find this existence challenging");
+          expect(response.body).toHaveProperty("topic", "mitch");
+          expect(response.body).toHaveProperty("created_at", expect.any(String));
+          expect(response.body).toHaveProperty("votes", expect.any(Number));
         });
     });
-    test(" try to get an article object that does not exist giving a status 200", () => {
+    test(" try to get an article object that does not exist giving a status 404", () => {
       const article_Id=99999;
       return request(app)
         .get(`/api/article/${article_Id}`)
-        .expect(200)
+        .expect(404)
         .then((response) => {
           expect(response.body).toEqual({});
+        });
+    })
+    test(" try to get an article object when the article_id is not a number, giving a status 400", () => {
+      const article_Id='ABC';
+      return request(app)
+        .get(`/api/article/${article_Id}`)
+        .expect(400)
+        .then((response) => {
+          expect(response.body).toEqual({status: 400, msg: "bad request"});
         });
     })
   });
