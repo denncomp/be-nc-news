@@ -35,7 +35,7 @@ beforeEach(() => {
     })
   });
 
-  describe("GET request along the path of /api/article/:article_id.. returns an object of an article", () => {
+  describe.only("GET request along the path of /api/article/:article_id.. returns an object of an article", () => {
     test(" get an article object with the status code 200", () => {
       const article_Id=1;
       return request(app)
@@ -66,6 +66,33 @@ beforeEach(() => {
         .expect(400)
         .then((response) => {
           expect(response.body).toEqual({status: 400, msg: "bad request"});
+        });
+    })
+  });
+  describe("GET request along the path of /api/users.. returns an array of users", () => {
+    test(" get an array of users with the status code 200", () => {
+      return request(app)
+        .get("/api/users")
+        .expect(200)
+        .then((response) => {
+          expect(response.body.users.length > 0).toBe(true);
+          expect(
+            response.body.users.forEach((users) => {
+              expect(users).toHaveProperty(
+                "username",
+                expect.any(String)
+              );
+              expect(users).toHaveProperty(
+                "name",
+                expect.any(String)
+              );
+              expect(users).toHaveProperty(
+                "avatar_url",
+                expect.any(String)
+              );
+
+            })
+          );
         });
     })
   });
