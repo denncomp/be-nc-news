@@ -69,3 +69,30 @@ beforeEach(() => {
         });
     })
   });
+  describe.only("GET request along the path of /api/users.. returns an array of users", () => {
+    test(" get an array of users with the status code 200", () => {
+      return request(app)
+        .get("/api/users")
+        .expect(200)
+        .then((response) => {
+          console.log(response.body)
+          expect(response.body.topics.length > 0).toBe(true);
+          expect(
+            response.body.topics.forEach((topics) => {
+              expect(topics).toHaveProperty(
+                "username",
+                expect.any(String)
+              );
+              expect(topics).toHaveProperty(
+                "name",
+                expect.any(String)
+              );
+              expect(topics).toHaveProperty(
+                "avatar_url",
+                expect.any(String)
+              );
+            })
+          );
+        });
+    })
+  });
