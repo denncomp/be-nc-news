@@ -7,7 +7,7 @@ app.get("/api/topics", getTopics);
 
 app.get("/api/article/:article_id", getArticleById);
 
-app.get("/api/users",getUsers);
+app.get("/api/users", getUsers);
 
 //custom err
 app.use((err, req, res, next) => {
@@ -17,6 +17,7 @@ app.use((err, req, res, next) => {
     next();
   }
 });
+
   app.use((err, req, res, next) => {
     console.log(err, "FIX THIS NOW");
     res.status(500).send({ msg: "Internal error" });

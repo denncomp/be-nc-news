@@ -19,6 +19,7 @@ exports.selectArticleById = (articleId) => {
     return results.rows[0];
   });
 };
+
 exports.selectUsers = () => {
   let queryStr = "SELECT * FROM users";
   return db.query(queryStr).then((results) => {

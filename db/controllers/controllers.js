@@ -13,16 +13,16 @@ exports.getArticleById = (req, res, next) => {
  const articleId = req.params.article_id;
  selectArticleById(articleId)
     .then((articleData) => {
-      res.status(200).send(articleData );
+      res.status(200).send(articleData )
     })
     .catch((err) => {
-      next(err);
+      next(err)
     });
 };
 
 exports.getUsers = (req, res, next) => {
   selectUsers()
     .then((arrayOfUsers) => {
-      res.status(200).send({ topics: arrayOfUsers });
-    })
+      res.status(200).send(arrayOfUsers )
+    });
 };
