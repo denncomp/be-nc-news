@@ -35,7 +35,7 @@ beforeEach(() => {
     })
   });
 
-  describe("GET request along the path of /api/article/:article_id.. returns an object of an article", () => {
+  describe.only("GET request along the path of /api/article/:article_id.. returns an object of an article", () => {
     test(" get an article object with the status code 200", () => {
       const article_Id=1;
       return request(app)
@@ -78,6 +78,7 @@ beforeEach(() => {
           expect(response.body.length > 0).toBe(true);
           expect(
             response.body.forEach((users) => {
+
               expect(users).toHaveProperty(
                 "username",
                 expect.any(String)
@@ -90,6 +91,7 @@ beforeEach(() => {
                 "avatar_url",
                 expect.any(String)
               );
+
             })
           );
         });
