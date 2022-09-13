@@ -77,16 +77,16 @@ beforeEach(() => {
         .then((response) => {
           expect(response.body.length > 0).toBe(true);
           expect(
-            response.body.forEach((topics) => {
-              expect(topics).toHaveProperty(
+            response.body.forEach((users) => {
+              expect(users).toHaveProperty(
                 "username",
                 expect.any(String)
               );
-              expect(topics).toHaveProperty(
+              expect(users).toHaveProperty(
                 "name",
                 expect.any(String)
               );
-              expect(topics).toHaveProperty(
+              expect(users).toHaveProperty(
                 "avatar_url",
                 expect.any(String)
               );
