@@ -14,7 +14,8 @@ exports.selectArticleById = (articleId) => {
   let queryStr = "SELECT * FROM articles WHERE article_id = $1;"
   return db.query(queryStr,[articleId]).then((results) => {
     if (Object.keys(results.rows[0]).length === 0) {
-      return Promise.reject({status: 404, msg:"Record not found"})
+      return Promise.reject({status: 404, msg: "Record not found"})
+
     }
     return results.rows[0];
   });

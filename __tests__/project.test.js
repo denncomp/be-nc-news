@@ -75,9 +75,10 @@ beforeEach(() => {
         .get("/api/users")
         .expect(200)
         .then((response) => {
-          expect(response.body.users.length > 0).toBe(true);
+          expect(response.body.length > 0).toBe(true);
           expect(
-            response.body.users.forEach((users) => {
+            response.body.forEach((users) => {
+
               expect(users).toHaveProperty(
                 "username",
                 expect.any(String)
