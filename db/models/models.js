@@ -11,7 +11,7 @@ exports.selectArticleById = (articleId) => {
     return Promise.reject({ status: 400, msg: "bad request" });
   }
  
-  let queryStr = "SELECT * FROM articles WHERE article_id = $1;"
+  let queryStr = 'SELECT * FROM articles WHERE article_id = $1'
   return db.query(queryStr,[articleId]).then((results) => {
     if (Object.keys(results.rows[0]).length === 0) {
       return Promise.reject({status: 404, msg: "Record not found"})
@@ -25,5 +25,12 @@ exports.selectUsers = () => {
   let queryStr = "SELECT * FROM users";
   return db.query(queryStr).then((results) => {
     return results.rows;
+  });
+};
+
+exports.updateArticleById = (articleId,articleUpdate) => {
+  let queryStr = 'UPDATE articles SET votes = (votes + $1) WHERE article_id = $2 RETURNING *;';
+  return db.query(queryStr,[articleUpdate,articleId]).then((results) => {
+    return results.rows[0];
   });
 };

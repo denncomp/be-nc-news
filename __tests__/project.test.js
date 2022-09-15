@@ -35,7 +35,7 @@ beforeEach(() => {
     })
   });
 
-  describe.only("GET request along the path of /api/article/:article_id.. returns an object of an article", () => {
+  describe("GET request along the path of /api/article/:article_id.. returns an object of an article", () => {
     test(" get an article object with the status code 200", () => {
       const article_Id=1;
       return request(app)
@@ -97,3 +97,30 @@ beforeEach(() => {
         });
     })
   });
+  describe('6. PATCH /api/article/:article_id', () => {
+    it('status:201, responds with the updated article', () => {
+      const inclVotes = {
+        votes: -20
+      };
+      return request(app)
+        .patch('/api/article/1')
+        .send(inclVotes)
+        .expect(201)
+        .then(({ body }) => {
+          expect(body.votes).toEqual(80)
+        });
+    });
+    it('status:201, responds with the updated article', () => {
+      const inclVotes = {
+        votes: 20
+      };
+      return request(app)
+        .patch('/api/article/3')
+        .send(inclVotes)
+        .expect(201)
+        .then(({ body }) => {
+          expect(body.votes).toEqual(20)
+        });
+    });
+  });
+  
